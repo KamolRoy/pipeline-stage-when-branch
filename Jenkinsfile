@@ -1,26 +1,22 @@
 pipeline{
     agent any
-    environment{
-        version='2.0'
-        name = 'Jeff'
-    }
 
     stages {
-        stage('Build'){
+        stage('Build Main'){
             when {
-                allOf {
-                    expression{
-                    version == "1.0"
-                    name == 'Jeff'
-                    }
-                }
+               branch 'main'
             }
             steps{
-                echo "${version}"
-                echo "${name}"
+                echo "Building Main"
+            }
+        }
+        stage('Build Dev'){
+            when{
+                branch 'dev'
+            }
+            steps{
+                echo "Building Dev"
             }
         }
     }   
 }
-
-
